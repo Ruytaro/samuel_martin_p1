@@ -1,4 +1,4 @@
-name: samuel_martin_p1
+name: samuel_martin_c1
 description: "A new Flutter project."
 publish_to: 'none'
 version: 0.1.0
@@ -9,11 +9,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  file_picker: ^10.3.3
+  image_picker: ^1.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
