@@ -7,7 +7,7 @@ class UserManager {
 
   final Map<String, User> _users = HashMap();
   User? _currentUser;
-  User get getCurrentUser => _currentUser!;
+  User? get getCurrentUser => _currentUser;
 
   UserManager._internal();
 

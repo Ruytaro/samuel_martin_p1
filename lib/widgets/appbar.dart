@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-AppBar myAppBar(){
+AppBar myAppBar() {
   return AppBar(title: Text("data"));
 }
