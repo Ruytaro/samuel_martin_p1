@@ -4,13 +4,14 @@ import 'widgets/appbar.dart';
 import 'widgets/drawer.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Project 1',
-      theme: ThemeData(colorSchemeSeed: Colors.blue),
+      theme:  ThemeData(colorSchemeSeed: Colors.deepPurple,brightness: Brightness.light),
+      darkTheme:  ThemeData(colorSchemeSeed: Colors.deepPurple,brightness: Brightness.dark),
       home: Scaffold(
         appBar: myAppBar(),
         drawer: myDrawer(),
@@ -21,5 +22,5 @@ class MyApp extends StatelessWidget {
 }
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
