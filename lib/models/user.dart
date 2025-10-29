@@ -1,6 +1,6 @@
 class User {
-  String? username;
-  String? password;
+  String username;
+  String password;
   String avatar;
   int age;
   String pronoum;
@@ -8,8 +8,8 @@ class User {
   bool admin;
 
   User(
-    String this.username,
-    String this.password, {
+    this.username,
+    this.password, {
     this.avatar = "images/avatar.png",
     this.age = 33,
     this.pronoum = "Any",

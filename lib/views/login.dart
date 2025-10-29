@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:samuel_martin_c1/services/screen_manager.dart';
+import 'package:samuel_martin_c1/services/state_manager.dart';
 import 'package:samuel_martin_c1/services/user_manager.dart';
 import 'package:samuel_martin_c1/widgets/buttons.dart';
 import 'package:samuel_martin_c1/widgets/forms.dart';
@@ -7,12 +7,13 @@ import 'package:samuel_martin_c1/utils/notifications.dart';
 
 Widget loginView(BuildContext context){
   UserManager um = UserManager();
-  ScreenManager sm = ScreenManager();
-  late String name;
-  late String pass;
+  StateManager sm = StateManager();
+  String name ="";
+  String pass="";
   void doLogin(){
     if (um.logIn(name, pass)){
       sm.set("main");
+      sm.doUpdate(context);
       Notifications.showMessage(context,"Logged");
     } else {
       Notifications.showError(context, "Check credentials");

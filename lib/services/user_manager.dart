@@ -1,5 +1,4 @@
 import 'dart:collection';
-
 import '../models/user.dart';
 
 class UserManager {
@@ -16,7 +15,7 @@ class UserManager {
   }
 
   bool register(User user) {
-    final name = user.username!;
+    final name = user.username;
     if (_users.containsKey(name)) {
       return false;
     }
@@ -24,13 +23,11 @@ class UserManager {
     return true;
   }
 
-  void logOut(){
-    _currentUser=null;
-
+  void logOut() {
+    _currentUser = null;
   }
 
   bool logIn(String username, String password) {
-    print(_users);
     if (!_users.containsKey(username)) {
       return false;
     }
