@@ -9,7 +9,7 @@ class User {
 
   User(
     String this.username,
-    String password, {
+    String this.password, {
     this.avatar = "images/avatar.png",
     this.age = 33,
     this.pronoum = "Any",

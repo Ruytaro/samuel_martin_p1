@@ -15,7 +15,6 @@ String? validateStrongPassword(String label, String? value) {
   if (!isSecurePassword(value)) {
     return "Isn't a secure password";
   }
-
   return null;
 }
 

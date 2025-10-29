@@ -10,8 +10,7 @@ if (manager.getCurrentUser == null){
 return Drawer(
       child: Column(
         children: [
-          DrawerHeader(child: Text("Menu")),
-          
+          DrawerHeader(child: Text("Menu"),),
         ],
       ),
     );

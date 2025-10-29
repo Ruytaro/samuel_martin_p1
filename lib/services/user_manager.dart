@@ -26,9 +26,11 @@ class UserManager {
 
   void logOut(){
     _currentUser=null;
+
   }
 
-  bool authenticate(String username, String password) {
+  bool logIn(String username, String password) {
+    print(_users);
     if (!_users.containsKey(username)) {
       return false;
     }
