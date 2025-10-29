@@ -12,6 +12,8 @@ class StateManager {
     _screen = newScreen;
   }
 
+  ScaffoldMessenger messenger = ScaffoldMessenger(child: Text("data"));
+
   late Function(BuildContext) _updateCallback;
   String get getScreen => _screen;
 

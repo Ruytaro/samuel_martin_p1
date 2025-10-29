@@ -10,7 +10,7 @@ Widget myFormField(
 }) {
   return edgePadding( TextFormField(
     obscureText: obscure,
-    onChanged: (value) => updateCallback(label, value),
+    onChanged: (value) => updateCallback(value),
     validator: (value) => validator(label, value),
     decoration: InputDecoration(
       labelText: label,

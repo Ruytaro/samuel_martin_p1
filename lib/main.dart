@@ -34,8 +34,8 @@ class _MyAppState extends State<MyApp> {
     updateState(context);
     um.register(User("asd", "asd"));
     sm.setCallback(updateState);
-
     return MaterialApp(
+      scaffoldMessengerKey: GlobalKey(),
       title: 'Flutter Project 1',
       theme: ThemeData(
         colorSchemeSeed: Colors.deepPurple,
