@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:samuel_martin_c1/views/login.dart';
+import 'package:samuel_martin_c1/views/main.dart';
 
 class StateManager {
   static final StateManager _manager = StateManager._internal();
@@ -15,7 +17,6 @@ class StateManager {
   ScaffoldMessenger messenger = ScaffoldMessenger(child: Text("data"));
 
   late Function(BuildContext) _updateCallback;
-  String get getScreen => _screen;
 
   void doUpdate(BuildContext context) {
     _updateCallback(context);
@@ -23,5 +24,16 @@ class StateManager {
 
   void setCallback(void Function(BuildContext) update) {
     _updateCallback = update;
+  }
+
+  Widget? getScreen(BuildContext context) {
+    switch (_screen) {
+      case "main":
+        return SingleChildScrollView(child: mainView(context));
+      case "login":
+        return SingleChildScrollView(child: loginView(context));
+      default:
+        return SingleChildScrollView();
+    }
   }
 }
