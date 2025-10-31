@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:samuel_martin_c1/views/login.dart';
+import 'package:samuel_martin_c1/views/logout.dart';
 import 'package:samuel_martin_c1/views/main.dart';
 
 class StateManager {
@@ -16,13 +17,13 @@ class StateManager {
 
   ScaffoldMessenger messenger = ScaffoldMessenger(child: Text("data"));
 
-  late Function(BuildContext) _updateCallback;
+  late Function() _updateCallback;
 
-  void doUpdate(BuildContext context) {
-    _updateCallback(context);
+  void doUpdate( ) {
+    _updateCallback();
   }
 
-  void setCallback(void Function(BuildContext) update) {
+  void setCallback(void Function() update) {
     _updateCallback = update;
   }
 
@@ -32,8 +33,10 @@ class StateManager {
         return SingleChildScrollView(child: mainView(context));
       case "login":
         return SingleChildScrollView(child: loginView(context));
+      case "logout":
+        return SingleChildScrollView(child: logoutView(context));
       default:
-        return SingleChildScrollView();
+        return SingleChildScrollView(child: loginView(context));
     }
   }
 }

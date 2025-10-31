@@ -13,13 +13,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  void update() {
+   setState(() {});
+  }
+
   UserManager um = UserManager();
   StateManager sm = StateManager();
+
   @override
   Widget build(BuildContext context) {
-    
+    sm.setCallback(update);
     um.register(User("asd", "asd"));
-    sm.doUpdate(context);
+    sm.doUpdate();
     return MaterialApp(
       scaffoldMessengerKey: GlobalKey(),
       title: 'Flutter Project 1',
@@ -31,10 +36,14 @@ class _MyAppState extends State<MyApp> {
         colorSchemeSeed: Colors.deepPurple,
         brightness: Brightness.dark,
       ),
-      home: Scaffold(
-        appBar: myAppBar(),
-        drawer: myDrawer(),
-        body: sm.getScreen(context),
+      home: Builder(
+        builder: (context) {
+          return Scaffold(
+            appBar: myAppBar(),
+            drawer: myDrawer(),
+            body: sm.getScreen(context),
+          );
+        }
       ),
     );
   }

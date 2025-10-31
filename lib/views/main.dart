@@ -16,8 +16,8 @@ Widget mainView(BuildContext context) {
         myElevatedButton(() {
           Notifications.showMessage(context, "Logout");
           um.logOut();
-          sm.set("login");
-          sm.doUpdate(context);
+          sm.set("logout");
+          sm.doUpdate();
         }, Text("Logout!")),
       ],
     ),

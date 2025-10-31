@@ -13,8 +13,8 @@ Widget loginView(BuildContext context) {
   void doLogin() {
     if (um.logIn(name, pass)) {
       sm.set("main");
-      sm.doUpdate(context);
       Notifications.showMessage(context,"Logged");
+      sm.doUpdate();
     } else {
       Notifications.showError(context, "Check credentials");
     }
@@ -24,8 +24,8 @@ Widget loginView(BuildContext context) {
     child: Column(
       children: [
         Image.asset("images/logo.png", width: 150),
-        myFormField((name)=>name, "name"),
-        myFormField((pass)=>pass, "pass",obscure: true),
+        myFormField((v){name=v;}, "name"),
+        myFormField((v){pass=v;}, "pass",obscure: true),
         myElevatedButton(doLogin, Text("Login")),
       ],
     ),
