@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:samuel_martin_c1/services/state_manager.dart';
 import 'package:samuel_martin_c1/services/user_manager.dart';
+import 'package:samuel_martin_c1/widgets/adminCheckBox.dart';
 import 'package:samuel_martin_c1/widgets/buttons.dart';
 import 'package:samuel_martin_c1/widgets/forms.dart';
 import 'package:samuel_martin_c1/utils/notifications.dart';
+import 'package:samuel_martin_c1/models/user.dart';
 
 Widget registerView(BuildContext context) {
   UserManager um = UserManager();
@@ -12,14 +14,25 @@ Widget registerView(BuildContext context) {
   String pass = "";
   String pass2 = "";
   String age = "";
+  bool admin = false;
+  void doRegister() {
+    if(pass != pass2){
+      Notifications.showError(context, "Passwords doesn't match!");
+      return;
+    }
+    User newUser = User(name, pass);
+    newUser.age=age as int;
+    if (newUser.age < 18 || newUser.age > 100){
 
-  void doLogin() {
-    if (um.logIn(name, pass)) {
+    }
+    newUser.admin=admin;
+
+    if (um.register(newUser)) {
       sm.set("main");
-      Notifications.showMessage(context, "Logged");
+      Notifications.showMessage(context, "Account created");
       sm.doUpdate();
     } else {
-      Notifications.showError(context, "Check credentials");
+      Notifications.showError(context, "Check user data");
     }
   }
 
@@ -47,7 +60,9 @@ Widget registerView(BuildContext context) {
         myFormField((v) {
           age = v;
         }, "Type your age"),
-        myElevatedButton(doLogin, Text("Login")),
+        if (um.isAdmin()) adminCheckBox(),
+
+        myElevatedButton(doRegister, Text("Create account")),
       ],
     ),
   );

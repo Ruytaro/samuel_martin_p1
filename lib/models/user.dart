@@ -1,3 +1,4 @@
+import 'package:samuel_martin_c1/models/order.dart';
 import 'package:samuel_martin_c1/models/product.dart';
 
 class User {
@@ -10,6 +11,7 @@ class User {
   bool admin;
 
   Map<Product,int> basket = {};
+  List<Order> orders = List.empty(growable: true);
   
 
   User(

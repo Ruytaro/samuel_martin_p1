@@ -15,7 +15,10 @@ class UserManager {
   }
 
   bool isAdmin() {
-    if (_currentUser!.username == "admin") {
+    if (_currentUser==null){
+      return false;
+    }
+    if (_currentUser?.username == "admin") {
       return true;
     }
     return _currentUser!.admin;
