@@ -14,6 +14,13 @@ class UserManager {
     return _manager;
   }
 
+  bool isAdmin() {
+    if (_currentUser!.username == "admin") {
+      return true;
+    }
+    return _currentUser!.admin;
+  }
+
   bool register(User user) {
     final name = user.username;
     if (_users.containsKey(name)) {

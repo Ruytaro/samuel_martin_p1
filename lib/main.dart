@@ -23,9 +23,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     sm.setCallback(update);
-    um.register(User("asd", "asd"));
+    um.register(User("admin", "admin"));
     sm.doUpdate();
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: GlobalKey(),
       title: 'Flutter Project 1',
       theme: ThemeData(

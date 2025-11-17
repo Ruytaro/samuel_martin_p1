@@ -1,3 +1,5 @@
+import 'package:samuel_martin_c1/models/product.dart';
+
 class User {
   String username;
   String password;
@@ -6,6 +8,9 @@ class User {
   String pronoum;
   String province;
   bool admin;
+
+  Map<Product,int> basket = {};
+  
 
   User(
     this.username,

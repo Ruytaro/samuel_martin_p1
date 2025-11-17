@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:samuel_martin_c1/views/login.dart';
 import 'package:samuel_martin_c1/views/logout.dart';
 import 'package:samuel_martin_c1/views/main.dart';
+import 'package:samuel_martin_c1/views/register.dart';
 
 class StateManager {
   static final StateManager _manager = StateManager._internal();
@@ -35,6 +36,8 @@ class StateManager {
         return SingleChildScrollView(child: loginView(context));
       case "logout":
         return SingleChildScrollView(child: logoutView(context));
+      case "register":
+        return SingleChildScrollView(child: registerView(context));
       default:
         return SingleChildScrollView(child: loginView(context));
     }

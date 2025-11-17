@@ -5,11 +5,14 @@ import 'package:samuel_martin_c1/widgets/buttons.dart';
 import 'package:samuel_martin_c1/widgets/forms.dart';
 import 'package:samuel_martin_c1/utils/notifications.dart';
 
-Widget loginView(BuildContext context) {
+Widget registerView(BuildContext context) {
   UserManager um = UserManager();
   StateManager sm = StateManager();
   String name = "";
   String pass = "";
+  String pass2 = "";
+  String age = "";
+
   void doLogin() {
     if (um.logIn(name, pass)) {
       sm.set("main");
@@ -26,19 +29,25 @@ Widget loginView(BuildContext context) {
         Image.asset("images/logo.png", width: 150),
         myFormField((v) {
           name = v;
-        }, "name"),
+        }, "Username"),
         myFormField(
           (v) {
             pass = v;
           },
-          "pass",
+          "Password",
           obscure: true,
         ),
+        myFormField(
+          (v) {
+            pass2 = v;
+          },
+          "Retype password",
+          obscure: true,
+        ),
+        myFormField((v) {
+          age = v;
+        }, "Type your age"),
         myElevatedButton(doLogin, Text("Login")),
-        myElevatedButton(() {
-          sm.set("register");
-          sm.doUpdate();
-        }, Text("Register")),
       ],
     ),
   );

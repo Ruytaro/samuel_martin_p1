@@ -4,10 +4,15 @@ import 'package:samuel_martin_c1/widgets/buttons.dart';
 
 Widget logoutView(BuildContext context) {
   StateManager sm = StateManager();
-  return Center(
-    child: myElevatedButton(() {
-      sm.set("login");
-      sm.doUpdate();
-    }, Text("Go to login")),
+  return Column(
+    children: [
+      Text("Your session was terminated!"),
+      Center(
+        child: myElevatedButton(() {
+          sm.set("login");
+          sm.doUpdate();
+        }, Text("Go to login")),
+      ),
+    ],
   );
 }
