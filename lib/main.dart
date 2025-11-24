@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   void update() {
-   setState(() {});
+    setState(() {});
   }
 
   UserManager um = UserManager();
@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     sm.setCallback(update);
     um.register(User("admin", "admin"));
+    um.register(User("Tunombre", "Tunombre"));
     sm.doUpdate();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -44,7 +45,7 @@ class _MyAppState extends State<MyApp> {
             drawer: myDrawer(),
             body: sm.getScreen(context),
           );
-        }
+        },
       ),
     );
   }

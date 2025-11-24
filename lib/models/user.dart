@@ -9,9 +9,10 @@ class User {
   String pronoum;
   String province;
   bool admin;
+  bool disabled;
 
   Map<Product,int> basket = {};
-  List<Order> orders = List.empty(growable: true);
+  List<Order> orders =  List.empty(growable: true);
   
 
   User(
@@ -22,6 +23,7 @@ class User {
     this.pronoum = "Any",
     this.province = "Huesca",
     this.admin=false,
+    this.disabled=false,
   });
 
   bool checkLogin(String name, String pass) {

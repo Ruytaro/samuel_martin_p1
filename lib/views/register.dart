@@ -6,6 +6,7 @@ import 'package:samuel_martin_c1/widgets/buttons.dart';
 import 'package:samuel_martin_c1/widgets/forms.dart';
 import 'package:samuel_martin_c1/utils/notifications.dart';
 import 'package:samuel_martin_c1/models/user.dart';
+import 'package:samuel_martin_c1/widgets/padding.dart';
 
 Widget registerView(BuildContext context) {
   UserManager um = UserManager();
@@ -49,19 +50,21 @@ Widget registerView(BuildContext context) {
             obscure: true,
             validator: validateStrongPassword,
           ),
-          TextFormField(
-            onChanged: (value) => pass2,
-            validator: (value) {
-              if (value != pass) {
-                return "Retype the password!";
-              }
-              return null;
-            },
-            obscureText: true,
-            decoration: InputDecoration(
-              labelText: "Retype password",
-              border: OutlineInputBorder(),
-              constraints: BoxConstraints(maxWidth: 300),
+          edgePadding(
+            TextFormField(
+              onChanged: (value) => pass2,
+              validator: (value) {
+                if (value != pass) {
+                  return "Retype the password!";
+                }
+                return null;
+              },
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: "Retype password",
+                border: OutlineInputBorder(),
+                constraints: BoxConstraints(maxWidth: 300),
+              ),
             ),
           ),
           myFormField((v) => age, "Type your age", validator: validateNumber),
@@ -74,8 +77,12 @@ Widget registerView(BuildContext context) {
                 ],
               ),
             ),
-
           myElevatedButton(doRegister, Text("Create account")),
+          if (!um.isLogged())
+            myElevatedButton(() {
+              sm.set("Login");
+              sm.doUpdate();
+            }, Text("Go to Login")),
         ],
       ),
     ),

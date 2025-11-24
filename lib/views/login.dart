@@ -10,14 +10,76 @@ Widget loginView(BuildContext context) {
   StateManager sm = StateManager();
   String name = "";
   String pass = "";
+
+  Future<void> showPassword(String? username) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Account recovery'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text("This is what we know about $username"),
+                um.recoverPassword(username),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> promtUsername() async {
+    String? username;
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Account recovery'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text("We're going to recover your password"),
+                Text('Please type your username:'),
+                myFormField((name) {
+                  username = name;
+                }, "Username"),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Search'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                showPassword(username);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void doLogin() {
     if (um.logIn(name, pass)) {
       sm.set("main");
       Notifications.showMessage(context, "Logged");
-      sm.doUpdate();
     } else {
       Notifications.showError(context, "Check credentials");
     }
+    sm.doUpdate();
   }
 
   return Center(
@@ -39,6 +101,8 @@ Widget loginView(BuildContext context) {
           sm.set("register");
           sm.doUpdate();
         }, Text("Register")),
+        if (um.hasFailedLogins())
+          myElevatedButton(promtUsername, Text("Recover account")),
       ],
     ),
   );

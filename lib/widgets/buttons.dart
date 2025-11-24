@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:samuel_martin_c1/widgets/padding.dart';
 
-ElevatedButton myElevatedButton(VoidCallback? callback, Widget label) {
- return ElevatedButton(onPressed: callback, child: label);
+Widget myElevatedButton(VoidCallback? callback, Widget label) {
+  return edgePadding(ElevatedButton(onPressed: callback, child: label));
 }

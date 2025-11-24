@@ -20,7 +20,7 @@ class StateManager {
 
   late Function() _updateCallback;
 
-  void doUpdate( ) {
+  void doUpdate() {
     _updateCallback();
   }
 
