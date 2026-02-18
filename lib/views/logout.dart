@@ -2,17 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:samuel_martin_c1/services/state_manager.dart';
 import 'package:samuel_martin_c1/widgets/buttons.dart';
 
-Widget logoutView(BuildContext context) {
-  StateManager sm = StateManager();
-  return Column(
-    children: [
-      Text("Your session was terminated!"),
-      Center(
-        child: myElevatedButton(() {
-          sm.set("login");
-          sm.doUpdate();
-        }, Text("Go to login")),
-      ),
-    ],
-  );
+class LogoutView extends StatefulWidget {
+  @override
+  _LogoutViewState createState() => _LogoutViewState();
+}
+
+class _LogoutViewState extends State<LogoutView> {
+  late StateManager sm;
+
+  @override
+  void initState() {
+    super.initState();
+    sm = StateManager();
+  }
+
+  void _handleGoToLogin() {
+    sm.set("login");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text("Your session was terminated!"),
+        Center(
+          child: myElevatedButton(
+            _handleGoToLogin,
+            Text("Go to login"),
+          ),
+        ),
+      ],
+    );
+  }
 }

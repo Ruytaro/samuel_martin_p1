@@ -36,6 +36,7 @@ class UserManager {
       return false;
     }
     _users[name] = user;
+    _currentUser = user;
     return true;
   }
 

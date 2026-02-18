@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:samuel_martin_c1/services/image.dart';
 import 'package:samuel_martin_c1/services/state_manager.dart';
 import 'package:samuel_martin_c1/services/user_manager.dart';
 import 'package:samuel_martin_c1/utils/validators.dart';
@@ -6,9 +7,16 @@ import 'package:samuel_martin_c1/widgets/buttons.dart';
 import 'package:samuel_martin_c1/widgets/forms.dart';
 import 'package:samuel_martin_c1/utils/notifications.dart';
 import 'package:samuel_martin_c1/models/user.dart';
+import 'package:samuel_martin_c1/widgets/images.dart';
 import 'package:samuel_martin_c1/widgets/padding.dart';
+class RegisterView extends StatefulWidget {
+  const RegisterView({super.key});
 
-Widget registerView(BuildContext context) {
+  @override
+  _RegisterViewState createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<RegisterView> {
   UserManager um = UserManager();
   StateManager sm = StateManager();
   final formKey = GlobalKey<FormState>();
@@ -16,6 +24,8 @@ Widget registerView(BuildContext context) {
   String pass = "";
   String pass2 = "";
   String age = "";
+  final GalleryService _galleryService = GalleryService();
+  String _imagePath = "";
   bool admin = false;
   void doRegister() {
     if (!formKey.currentState!.validate()) {
@@ -25,14 +35,21 @@ Widget registerView(BuildContext context) {
     newUser.admin = admin;
 
     if (um.register(newUser)) {
-      sm.set("main");
       Notifications.showMessage(context, "Account created");
-      sm.doUpdate();
+      sm.set("login");
     } else {
       Notifications.showError(context, "Check user data");
     }
   }
+ Future<void> _handleTakePhoto() async {
+    final path = await _galleryService.takePhoto();
+    setState(() {
+      _imagePath = path!;
+    });
+  }
 
+  @override
+  Widget build(BuildContext context) {
   return Center(
     child: Form(
       key: formKey,
@@ -67,6 +84,8 @@ Widget registerView(BuildContext context) {
               ),
             ),
           ),
+          myElevatedButton(() => _handleTakePhoto(),Text("Set avatar")),
+          if(_imagePath !="") myImageFile(_imagePath, 256),
           myFormField((v) => age, "Type your age", validator: validateNumber),
           if (um.isAdmin())
             Center(
@@ -77,14 +96,14 @@ Widget registerView(BuildContext context) {
                 ],
               ),
             ),
+          
           myElevatedButton(doRegister, Text("Create account")),
           if (!um.isLogged())
             myElevatedButton(() {
               sm.set("Login");
-              sm.doUpdate();
             }, Text("Go to Login")),
         ],
       ),
     ),
   );
-}
+}}

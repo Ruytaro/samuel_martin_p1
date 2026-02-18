@@ -17,7 +17,6 @@ Drawer? myDrawer() {
           ElevatedButton(
             onPressed: () {
               sm.set("register");
-              sm.doUpdate();
             },
             child: Text("Register new user"),
           ),

@@ -13,19 +13,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  void update() {
-    setState(() {});
-  }
+  late UserManager um;
+  late StateManager sm;
 
-  UserManager um = UserManager();
-  StateManager sm = StateManager();
+  @override
+  void initState() {
+    super.initState();
+    um = UserManager();
+    sm = StateManager();
+    um.register(User("admin", "admin"));
+    um.register(User("Tunombre", "Tunombre"));
+  }
 
   @override
   Widget build(BuildContext context) {
-    sm.setCallback(update);
-    um.register(User("admin", "admin"));
-    um.register(User("Tunombre", "Tunombre"));
-    sm.doUpdate();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       scaffoldMessengerKey: GlobalKey(),
@@ -40,10 +41,15 @@ class _MyAppState extends State<MyApp> {
       ),
       home: Builder(
         builder: (context) {
-          return Scaffold(
-            appBar: myAppBar(),
-            drawer: myDrawer(),
-            body: sm.getScreen(context),
+          return ListenableBuilder(
+            listenable: sm,
+            builder: (context, child) {
+              return Scaffold(
+                appBar: myAppBar(),
+                drawer: myDrawer(),
+                body: sm.getScreen(),
+              );
+            },
           );
         },
       ),
