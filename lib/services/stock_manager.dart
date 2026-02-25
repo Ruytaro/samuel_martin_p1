@@ -7,6 +7,10 @@ class StockManager {
     return false;
   }
 
+  Set<Product> getProducts(){
+    return products.keys.toSet();
+  }
+
   int getStock(Product p) {
     var stock = products[p];
     if (stock == null) {
